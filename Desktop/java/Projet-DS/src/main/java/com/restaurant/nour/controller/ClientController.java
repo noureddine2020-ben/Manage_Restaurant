@@ -83,6 +83,11 @@ public class ClientController {
 		return service.clientFidele();
 	}
 	
+	@GetMapping("/{id}/jour")
+	public String favoriteDayOfReservation(@PathVariable(name="id") int id)
+	{
+		return service.clientJourReserve(id);
+	}
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);

@@ -1,11 +1,15 @@
 package com.restaurant.nour.services;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +94,7 @@ public class ClientImpService implements ClientService {
 		 return oldClient;
 	}
 
-	//*************** l'idé est de trouver le client qui possède le maximum des tickets = client fidèle***********//
+	//*************** l'idée est de trouver le client qui possède le maximum des tickets = client fidèle***********//
 	@Override
 	public String clientFidele() {
 		//Client clientFidele = new Client();
@@ -111,5 +115,43 @@ public class ClientImpService implements ClientService {
 		return("Le client le plus fidèle est (Nom du client=" + entry.getKey() + ", avec le nombre total des tickets chez nous=" + entry.getValue() + ")");
 	}
 
+	@Override
+	public String clientJourReserve(int id) {
+		
+		//List<Client> clients  = rechercheTousLesClient();
+		Client client = rechercheParId(id);
+		List<LocalDate> dateReservation=new ArrayList<>();
+		List<Integer> jourDeLaSemaine  = new ArrayList<Integer>();
+		
+			List<Ticket> tickets=client.getTickets();
+			 
+			   for (Ticket ticket : tickets)
+			   {
+				  dateReservation.add(ticket.getDate());
+			   }
+		
+		System.out.println(dateReservation);
+		 
+		 for (LocalDate date : dateReservation)
+		     // System.out.println(date.getDayOfWeek().getValue());
+		  
+		    jourDeLaSemaine.add(date.getDayOfWeek().getValue());
+		 
+		 Map<Integer, Long> data =count((jourDeLaSemaine).stream()); // compter le nombre des plats pour chaque plat &stocker le resultat dans un map
+			
+			Entry<Integer, Long> entry = data.entrySet().stream().max((e1, e2) -> Long.compare(e1.getValue(), e2.getValue())).get(); // cherhcer la valeur maximale
+			 
+			return("Le jour de la semaine le plus reservé par le client "
+					+id+ " est le jour " + entry.getKey()+
+					"\nle jour 1 : Monday\nle jour 2 : Tuesday\nle jour 3 : Wednesday\nle jour 4 : Thursday\nle jour 5 : Friday\nle jour 6 : Saturday\n"
+					+ "le jour 7 : Sunday");
+	}
+	
+	//*********** méthode suivante qui compte le nombre d’occurrences de chaque valeur*******///
+
+	public static <E> Map<E, Long> count(Stream<E> stream) {
+	    return stream.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+	}
+	
 	
 }

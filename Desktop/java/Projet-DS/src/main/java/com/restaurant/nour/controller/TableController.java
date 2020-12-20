@@ -78,6 +78,13 @@ public class TableController {
 		tab = service.supprimerTable(id);
 		return tabConverter.entityToDto(tab);
 	}
+	
+	@GetMapping("/reserved")
+	public String GetMosteReservedTable()
+	{
+		return service.TablePlusReserve();
+	}
+	
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);

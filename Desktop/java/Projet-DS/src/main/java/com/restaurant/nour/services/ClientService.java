@@ -13,5 +13,6 @@ public interface ClientService {
 	public Client miseAjourClient(int id,Client client);
 	public Client supprimerClient(int id);
 	public String clientFidele();
+	public String clientJourReserve(int id);
 
 }

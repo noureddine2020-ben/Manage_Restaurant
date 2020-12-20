@@ -13,6 +13,7 @@ public interface Tableservice {
 	public TablePlace ajouterTable(TablePlace table);
 	public TablePlace miseAjourTable(int num,TablePlace table);
 	public TablePlace supprimerTable(int num);
+	public String TablePlusReserve();
 
 
 }
