@@ -1,13 +1,17 @@
 package com.restaurant.nour.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Map.Entry;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.restaurant.nour.dto.ClientDto;
+
 import com.restaurant.nour.entities.Client;
 import com.restaurant.nour.entities.Ticket;
 import com.restaurant.nour.repository.ClientRepository;
@@ -86,4 +90,26 @@ public class ClientImpService implements ClientService {
 		 return oldClient;
 	}
 
+	//*************** l'idé est de trouver le client qui possède le maximum des tickets = client fidèle***********//
+	@Override
+	public String clientFidele() {
+		//Client clientFidele = new Client();
+		List<Client> clients= rechercheTousLesClient();
+		Map<String, Integer> data = new HashMap<>();
+		int nb=0;
+		
+		for (Client client :clients)
+		{
+			nb=client.getTickets().size();
+			data.put(client.getName(), nb);
+		}
+		
+		System.out.println(data);
+		
+		Entry<String, Integer> entry = data.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get(); // cherhcer la valeur maximale
+		 
+		return("Le client le plus fidèle est (Nom du client=" + entry.getKey() + ", avec le nombre total des tickets chez nous=" + entry.getValue() + ")");
+	}
+
+	
 }

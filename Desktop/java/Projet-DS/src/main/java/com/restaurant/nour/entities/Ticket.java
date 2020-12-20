@@ -16,11 +16,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.PastOrPresent;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.restaurant.nour.dto.ClientDto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -59,6 +59,7 @@ public class Ticket {
     private TablePlace table;
     
     @ManyToMany(mappedBy = "tickets",cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<Met> Mets;
 	
 	

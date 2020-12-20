@@ -77,6 +77,12 @@ public class ClientController {
 		return converter.entityToDto(oldclient);
 	}
 	
+	@GetMapping("/fidele")
+	public String loyalCustomer()
+	{
+		return service.clientFidele();
+	}
+	
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);

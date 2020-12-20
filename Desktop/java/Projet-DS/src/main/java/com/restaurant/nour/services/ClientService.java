@@ -12,5 +12,6 @@ public interface ClientService {
 	public Client ajouterClient(Client c);
 	public Client miseAjourClient(int id,Client client);
 	public Client supprimerClient(int id);
+	public String clientFidele();
 
 }

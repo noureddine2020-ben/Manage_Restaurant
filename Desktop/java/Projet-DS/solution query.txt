@@ -1,0 +1,12 @@
+@Query("SELECT TOP 1\r\n" + 
+			"    p.Name\r\n" + 
+			" FROM plat p \r\n" + 
+			"   INNER JOIN ticket t \r\n" + 
+			 "  INNER JOIN table_met m \r\n" +
+			"     ON p.id = m.id \r\n" +
+			"     ON m.id = t.id \r\n" +
+			"WHERE t.date between(?1,?2) \r\n	"+
+			" GROUP BY p.nom\r\n" + 
+			" ORDER BY COUNT(*) DESC")
+	public Plat mostBought (LocalDate dateDebut, LocalDate dateFin);
+	
