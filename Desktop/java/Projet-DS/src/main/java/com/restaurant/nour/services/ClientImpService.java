@@ -130,7 +130,7 @@ public class ClientImpService implements ClientService {
 				  dateReservation.add(ticket.getDate());
 			   }
 		
-		System.out.println(dateReservation);
+		//System.out.println(dateReservation);
 		 
 		 for (LocalDate date : dateReservation)
 		     // System.out.println(date.getDayOfWeek().getValue());
