@@ -68,6 +68,15 @@ public class MetController {
 	 return (List<Plat>) repoPlat.findAll();
  }
  
+ //************** chercher tous les plats pour une période donnée***************//
+ 
+ @GetMapping("/plat/{date1}/{date2}")
+ public List<Plat> findAllPlatsByDate(@PathVariable(name="date") LocalDate date1,
+		                              @PathVariable(name="date") LocalDate date2
+		                            )
+ {
+	 return (List<Plat>) repoPlat.findByDate(date1,date2);
+ }
  //************** recherhcer les plats par leurs nom*************//
  
  @GetMapping("/plat/{nom}")

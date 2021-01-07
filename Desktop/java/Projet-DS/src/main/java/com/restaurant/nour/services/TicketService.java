@@ -1,5 +1,6 @@
 package com.restaurant.nour.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -12,5 +13,6 @@ public interface TicketService {
 	public Ticket ajouterTicket(Ticket tic);
 	public Ticket miseAjourTicket(int num,Ticket tic);
 	public Ticket supprimerTicket(int num);
+	public String RevenuParJour(LocalDate date);
 
 }

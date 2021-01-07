@@ -1,5 +1,6 @@
 package com.restaurant.nour.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -120,6 +121,13 @@ public class TicketImpService implements TicketService {
 	Ticket oldTicket = this.rechercheParNum(num);
 	   reposTicket.delete(oldTicket);
 	   return oldTicket;
+	}
+
+	@Override
+	public String RevenuParJour(LocalDate date) {
+		 
+		reposTicket.findTicketWithDate(date);
+		return null;
 	}
 	
 
